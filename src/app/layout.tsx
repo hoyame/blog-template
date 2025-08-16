@@ -45,6 +45,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {fontUrl && <link rel="stylesheet" href={fontUrl} />}
         {blog.favicon && <link rel="icon" href={blog.favicon} />}
         <link

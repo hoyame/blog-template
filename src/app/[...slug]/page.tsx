@@ -98,10 +98,29 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
   const path = slug.join("/");
   const page = getJsonPageByMetaSlug(path);
   if (!page) return {};
+  
+  const blog = getBlogConfig();
+  const title = (page.meta.title ?? "").replace(/^"|"$/g, "");
+  const description = page.meta.description;
+  const canonical = page.meta.canonical_url;
+  
   return {
-    title: (page.meta.title ?? "").replace(/^"|"$/g, ""),
-    description: page.meta.description,
-    alternates: { canonical: page.meta.canonical_url },
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "article",
+      images: ["/favicon/apple-touch-icon.png"],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/favicon/apple-touch-icon.png"],
+    },
   } satisfies Metadata;
 }
 
