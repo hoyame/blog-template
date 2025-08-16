@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --blog-bg: #ffffff;
+  --blog-text: #1a1a1a;
+  --blog-accent: #3b82f6;
+  --blog-font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+body {
+  background: var(--blog-bg);
+  color: var(--blog-text);
+  font-family: var(--blog-font);
+  letter-spacing: -0.5px;
+}
+
+.blog-logo svg {
+  height: 32px;
+  width: auto;
+}
+
+.intro-logo svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.1em;
+}

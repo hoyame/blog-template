@@ -1,30 +1,53 @@
 import Footer from "@/app/_components/footer";
-import { CMS_NAME, HOME_OG_IMAGE_URL } from "@/lib/constants";
+import Header from "@/app/_components/header";
+import { HOME_OG_IMAGE_URL } from "@/lib/constants";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import cn from "classnames";
-import { ThemeSwitcher } from "./_components/theme-switcher";
+import { getBlogConfig, extractGoogleFontFamily, resolveColors } from "@/lib/readConfig";
 
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+ 
 
-export const metadata: Metadata = {
-  title: `Next.js Blog Example with ${CMS_NAME}`,
-  description: `A statically generated blog example using Next.js and ${CMS_NAME}.`,
-  openGraph: {
-    images: [HOME_OG_IMAGE_URL],
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const blog = getBlogConfig();
+  const metadataBase = blog.siteUrl ? new URL(blog.siteUrl) : undefined;
+  return {
+    title: blog.title,
+    description: blog.description,
+    metadataBase,
+    openGraph: {
+      url: blog.siteUrl || undefined,
+      title: blog.title,
+      description: blog.description,
+      images: [HOME_OG_IMAGE_URL],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: blog.title,
+      description: blog.description,
+      images: [HOME_OG_IMAGE_URL],
+    },
+  };
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const blog = getBlogConfig();
+  const theme = resolveColors(blog);
+  const background = theme.light.background;
+  const text = theme.light.text;
+  const accent = theme.light.accent;
+  const fontUrl = blog.fonts.googleFontsUrl;
+  const fontFamily = extractGoogleFontFamily(fontUrl) ?? undefined;
+
   return (
     <html lang="en">
       <head>
+        {fontUrl && <link rel="stylesheet" href={fontUrl} />}
+        {blog.favicon && <link rel="icon" href={blog.favicon} />}
         <link
           rel="apple-touch-icon"
           sizes="180x180"
@@ -54,13 +77,16 @@ export default function RootLayout({
           name="msapplication-config"
           content="/favicon/browserconfig.xml"
         />
-        <meta name="theme-color" content="#000" />
-        <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+        <meta name="theme-color" content={background} />
+        
+        <style>{`:root{--blog-bg:${background};--blog-text:${text};--blog-accent:${accent};--blog-border:${theme.light.border};}
+        .dark:root{--blog-bg:${theme.dark.background};--blog-text:${theme.dark.text};--blog-accent:${theme.dark.accent};--blog-border:${theme.dark.border};}`}</style>
+        {fontFamily && (
+          <style>{`:root{--blog-font:'${fontFamily}', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';}`}</style>
+        )}
       </head>
-      <body
-        className={cn(inter.className, "dark:bg-slate-900 dark:text-slate-400")}
-      >
-        <ThemeSwitcher />
+      <body>
+        <Header />
         <div className="min-h-screen">{children}</div>
         <Footer />
       </body>

@@ -2,9 +2,8 @@ import Container from "@/app/_components/container";
 import Link from "next/link";
 import { getAllJsonPages } from "@/lib/jsonPages";
 
-export default function Index() {
+export default function ArticlesIndex() {
   const jsonPages = getAllJsonPages();
-
   return (
     <main>
       <Container>
@@ -15,12 +14,8 @@ export default function Index() {
                 key={p.id}
                 href={(p.meta.slug || `/${p.id}`).replace(/^\/+/, "/")}
                 className="block py-4 hover:opacity-70 transition-opacity duration-200"
-                style={{ borderColor: "var(--blog-border)" }}
               >
-                <h3 
-                  className="mb-2 text-xl font-bold leading-tight"
-                  style={{ color: "var(--blog-accent)" }}
-                >
+                <h3 className="mb-2 text-xl font-bold leading-tight" style={{ color: "var(--blog-accent)" }}>
                   {(p.meta.title ?? "").replace(/^"|"$/g, "")}
                 </h3>
                 {p.meta.description && (
@@ -34,3 +29,5 @@ export default function Index() {
     </main>
   );
 }
+
+
