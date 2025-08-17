@@ -16,6 +16,7 @@
     "fonts": {
       "googleFontsUrl": "https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap"
     },
-    "redirectionUrl": "https://hoxtio.fr/solutions"
+    "redirectionUrl": "https://hoxtio.fr/solutions",
+    "language": "fr"
   }
 }
