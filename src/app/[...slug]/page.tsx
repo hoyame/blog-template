@@ -36,7 +36,7 @@ export default async function CatchAllJson(props: Params) {
           </h1>
 
           <div className="flex items-center gap-3 mt-4 mb-6">
-            <Cta href={blog.siteUrl} text="Visiter" variant="link" size="sm" icon="arrow" />
+            <Cta href={blog.redirectionUrl} text="Visiter" variant="link" size="sm" icon="arrow" />
             <Cta href={`tel:${blog.contact.phone}`} text="Appeler" variant="link" size="sm" icon="phone" />
             <Cta href={`mailto:${blog.contact.email}`} text="Écrire" variant="link" size="sm" icon="mail" />
           </div>
@@ -50,7 +50,7 @@ export default async function CatchAllJson(props: Params) {
                 <div className="leading-relaxed" dangerouslySetInnerHTML={{ __html: renderedBody[idx].html }} />
               ) : null}
               {idx % 2 === 1 ? (
-                <Cta href={blog.siteUrl} text="Consulter notre site" variant="link" size="sm" icon="arrow" className="mt-4" />
+                <Cta href={blog.redirectionUrl} text="Consulter notre site" variant="link" size="sm" icon="arrow" className="mt-4" />
               ) : null}
             </section>
           ))}
@@ -76,7 +76,7 @@ export default async function CatchAllJson(props: Params) {
             <div className="flex flex-wrap gap-3">
               <Cta href={`mailto:${blog.contact.email}`} text="Écrire" variant="link" size="sm" icon="mail" />
               <Cta href={`tel:${blog.contact.phone}`} text="Appeler" variant="link" size="sm" icon="phone" />
-              <Cta href={blog.siteUrl} text="Visiter" variant="link" size="sm" icon="arrow" />
+              <Cta href={blog.redirectionUrl} text="Visiter" variant="link" size="sm" icon="arrow" />
             </div>
           </div>
 

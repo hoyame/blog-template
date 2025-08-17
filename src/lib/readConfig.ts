@@ -30,6 +30,7 @@ export interface BlogConfig {
   fonts?: {
     googleFontsUrl?: string;
   };
+  redirectionUrl?: string;
 }
 
 export interface RootConfig {
@@ -65,6 +66,7 @@ export function getBlogConfig(): Required<Required<RootConfig>["blog"]> {
     fonts: {
       googleFontsUrl: cfg.fonts?.googleFontsUrl ?? "",
     },
+    redirectionUrl: cfg.redirectionUrl ?? "https://hoxtio.fr/solutions",
   };
 }
 

@@ -30,7 +30,7 @@ const Header = () => {
             <span className="relative z-10 group-hover:opacity-80 transition-opacity duration-300">Articles</span>
           </Link>
           <Link 
-            href={blog.siteUrl}
+            href={blog.redirectionUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="relative px-6 py-2.5 transition-all duration-300 ease-out hover:scale-110 group overflow-hidden"
