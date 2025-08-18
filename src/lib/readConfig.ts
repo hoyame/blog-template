@@ -12,6 +12,7 @@ export interface BlogConfig {
   title?: string;
   description?: string;
   siteUrl?: string;
+  og_image_url?: string;
   logo?: {
     svg?: string;
     alt?: string;
@@ -54,6 +55,7 @@ export function getBlogConfig(): Required<Required<RootConfig>["blog"]> {
     title: cfg.title ?? "Blog",
     description: cfg.description ?? "",
     siteUrl: cfg.siteUrl ?? "/",
+    og_image_url: cfg.og_image_url ?? "/favicon/apple-touch-icon.png",
     logo: {
       svg: cfg.logo?.svg ?? "",
       alt: cfg.logo?.alt ?? "Logo",
